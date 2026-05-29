@@ -1,8 +1,11 @@
 import {defineConfig, devices} from '@playwright/test';
-import {TestConfig} from './lib/test_config';
-import {duration} from './lib/utils';
 
-const testConfig = new TestConfig();
+import {duration, testConfig} from '@mattermost/playwright-lib';
+
+const chromeUse = {
+    browserName: 'chromium' as const,
+    ...devices['Desktop Chrome'],
+};
 
 export default defineConfig({
     globalSetup: './global_setup',
@@ -35,7 +38,7 @@ export default defineConfig({
     projects: [
         {
             name: 'chromium',
-            use: {...devices['Desktop Chrome']},
+            use: chromeUse,
         },
     ],
 });
